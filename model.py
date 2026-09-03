@@ -125,8 +125,14 @@ def mse_loss(y_true, y_pred):
     return float(np.mean((np.asarray(y_true, dtype=float) - np.asarray(y_pred, dtype=float)) ** 2))
     pass
 
-# Step 9 - mse_gradient (not yet solved)
-# TODO: implement
+# Step 9 - mse_gradient
+def mse_gradient(X, y_true, y_pred):
+    # TODO: Return the analytic MSE gradient w.r.t. weights: (2/n) X^T (y_pred - y_true)
+    X_mat = np.asarray(X, dtype=float)
+    n_samples = X_mat.shape[0]
+    errors = np.asarray(y_pred, dtype=float) - np.asarray(y_true, dtype=float)
+    return (2.0 / n_samples) * (X_mat.T @ errors)
+    pass
 
 # Step 10 - normal_equation (not yet solved)
 # TODO: implement
