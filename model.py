@@ -156,8 +156,31 @@ def initialize_weights(n_features, seed=None):
     return np.random.normal(loc=0.0, scale=0.01, size=n_features)
     pass
 
-# Step 12 - gd_step (not yet solved)
-# TODO: implement
+# Step 12 - gd_step
+def gd_step(X, y, weights, lr):
+    """Run one full-batch gradient descent update on the weights.
+
+    Args:
+        X: Design matrix of shape (n, d_in).
+        y: Target vector of shape (n,).
+        weights: Current weight vector of shape (d_in,).
+        lr: Learning rate (float).
+
+    Returns:
+        Updated weight vector of shape (d_in,).
+    """
+    # TODO: return the updated weight vector after one MSE gradient step
+        # 1. Compute current predictions across all samples using our Step 007 logic
+    y_pred = predict_linear(X, weights)
+    
+    # 2. Calculate the analytical MSE gradient vector using our Step 009 logic
+    gradient = mse_gradient(X, y, y_pred)
+    
+    # 3. Take an analytical step down the error surface
+    updated_weights = weights - lr * gradient
+    
+    return updated_weights
+    pass
 
 # Step 13 - epoch_train_val_losses (not yet solved)
 # TODO: implement
