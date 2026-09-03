@@ -72,8 +72,16 @@ def compute_feature_stats(X):
     # Return as a clean, unpackable tuple
     return mean, std
 
-# Step 4 - standardize_features (not yet solved)
-# TODO: implement
+# Step 4 - standardize_features
+def standardize_features(X, mean, std):
+    # TODO: Apply z-score normalization using precomputed training mean and std.
+    """
+    Standardizes X using a precomputed stats tuple (mean, std).
+    """
+    X_numeric = np.asarray(X, dtype=float)
+    # mean, std = stats  # Unpack the tuple cleanly
+    return (X_numeric - mean) / std
+    pass
 
 # Step 5 - add_bias_column (not yet solved)
 # TODO: implement
