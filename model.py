@@ -79,7 +79,6 @@ def standardize_features(X, mean, std):
     Standardizes X using a precomputed stats tuple (mean, std).
     """
     X_numeric = np.asarray(X, dtype=float)
-    # mean, std = stats  # Unpack the tuple cleanly
     return (X_numeric - mean) / std
     pass
 
