@@ -52,8 +52,25 @@ def split_train_val_test(X, y, train_frac=0.6, val_frac=0.2):
     return X_train, y_train, X_val, y_val, X_test, y_test
     pass
 
-# Step 3 - compute_feature_stats (not yet solved)
-# TODO: implement
+# Step 3 - compute_feature_stats
+def compute_feature_stats(X):
+    """
+    Computes per-feature mean and standard deviation arrays along columns.
+    Safely replaces standard deviations of 0 with 1 to prevent division-by-zero.
+    Returns: (mean, std) as a tuple of NumPy arrays.
+    """
+    # Force the input array into float coordinates immediately
+    X_numeric = np.asarray(X, dtype=float)
+    
+    # Calculate across columns (axis=0)
+    mean = np.mean(X_numeric, axis=0)
+    std = np.std(X_numeric, axis=0)
+    
+    # Replace any standard deviation of exactly 0.0 with 1.0
+    std = np.where(std == 0.0, 1.0, std)
+    
+    # Return as a clean, unpackable tuple
+    return mean, std
 
 # Step 4 - standardize_features (not yet solved)
 # TODO: implement
