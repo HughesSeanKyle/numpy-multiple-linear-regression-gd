@@ -208,8 +208,24 @@ def epoch_train_val_losses(X_train, y_train, X_val, y_val, weights):
     return train_loss, y_val_loss
     pass
 
-# Step 14 - update_early_stop_state (not yet solved)
-# TODO: implement
+# Step 14 - update_early_stop_state
+def update_early_stop_state(val_loss, best_val_loss, wait, weights, best_weights, patience):
+    # TODO: Update best weights and patience counter; signal stop when val loss stalls...
+        # A strict improvement check (no tolerance padding required by default unless specified)
+    if val_loss < best_val_loss:
+        updated_best_val_loss = val_loss
+        updated_wait = 0
+        updated_best_weights = weights.copy() # Secure a fresh parameter checkpoint
+    else:
+        updated_best_val_loss = best_val_loss
+        updated_wait = wait + 1
+        updated_best_weights = best_weights   # Retain our previous best checkpoint array
+        
+    # Check if our incremental wait counter has exhausted the patience limit [source: 6, 1.3.1]
+    stop_training = updated_wait >= patience
+    
+    return updated_best_val_loss,updated_wait, updated_best_weights,stop_training
+    pass
 
 # Step 15 - init_training_state (not yet solved)
 # TODO: implement
