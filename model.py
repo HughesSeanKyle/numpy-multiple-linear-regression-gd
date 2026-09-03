@@ -134,8 +134,19 @@ def mse_gradient(X, y_true, y_pred):
     return (2.0 / n_samples) * (X_mat.T @ errors)
     pass
 
-# Step 10 - normal_equation (not yet solved)
-# TODO: implement
+# Step 10 - normal_equation
+def normal_equation(X, y):
+    # TODO: Solve for the closed-form least-squares weights via the normal equation.
+    """
+    Computes the exact, analytical global minimum vector using least-squares.
+    """
+    X_mat = np.asarray(X, dtype=float)
+    y_vec = np.asarray(y, dtype=float)
+    
+    # np.linalg.lstsq returns a tuple; index 0 isolates the optimal theta coefficients
+    theta_opt = np.linalg.lstsq(X_mat, y_vec, rcond=None)[0]
+    return theta_opt
+    pass
 
 # Step 11 - initialize_weights (not yet solved)
 # TODO: implement
