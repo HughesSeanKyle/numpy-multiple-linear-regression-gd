@@ -378,8 +378,38 @@ def create_lr_model(learning_rate=0.01, epochs=1000, patience=50, seed=0):
     }
     pass
 
-# Step 25 - fit_lr_model (not yet solved)
-# TODO: implement
+# Step 25 - fit_lr_model
+def fit_lr_model(model, X_train, y_train, X_val, y_val):
+    # TODO: Fit model with train stats, design matrices, GD, and normal eq
+        # 1. Capture training feature tracking statistics
+    mean, std = compute_feature_stats(X_train)
+    model["mean"] = mean
+    model["std"] = std
+    
+    # 2. Map data arrays into standardized design matrix spaces
+    X_train_b = prepare_design_matrix(X_train, mean, std)
+    X_val_b = prepare_design_matrix(X_val, mean, std)
+    
+    # 3. Calculate and cache the closed-form analytical normal equation solution
+    model["normal_weights"] = normal_equation(X_train_b, y_train)
+    
+    # 4. Orchestrate iterative optimization via our verified Step 017 runner
+    best_weights, train_losses, val_losses = train_batch_gd(
+        X_train=X_train_b, y_train=y_train,
+        X_val=X_val_b, y_val=y_val,
+        lr=model["learning_rate"],
+        epochs=model["epochs"],
+        patience=model["patience"],
+        seed=model["seed"]
+    )
+    
+    # Cache optimization outputs
+    model["weights"] = best_weights
+    model["train_losses"] = train_losses
+    model["val_losses"] = val_losses
+    
+    return model
+    pass
 
 # Step 26 - predict_lr_model (not yet solved)
 # TODO: implement
