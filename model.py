@@ -358,8 +358,25 @@ def weights_l2_distance(w_gd, w_closed):
     return float(np.sqrt(np.sum((arr1 - arr2) ** 2)))
     pass
 
-# Step 24 - create_lr_model (not yet solved)
-# TODO: implement
+# Step 24 - create_lr_model
+def create_lr_model(learning_rate=0.01, epochs=1000, patience=50, seed=0):
+    # TODO: Build the initial LinearRegressionGD-style model dictionary...
+    """
+    Initializes a decoupled Multiple Linear Regression model tracking dictionary.
+    """
+    return {
+        "learning_rate": float(learning_rate),
+        "epochs": int(epochs),
+        "patience": int(patience),
+        "seed": seed,
+        "mean": None,
+        "std": None,
+        "weights": None,          # Iterative GD optimal weights
+        "normal_weights": None,   # Analytical closed-form optimal weights
+        "train_losses": [],
+        "val_losses": []
+    }
+    pass
 
 # Step 25 - fit_lr_model (not yet solved)
 # TODO: implement
