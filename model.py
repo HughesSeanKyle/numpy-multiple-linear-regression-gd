@@ -350,8 +350,13 @@ def learning_curve_data(train_losses, val_losses):
     return epochs_idx, train_list, val_list
     pass
 
-# Step 23 - weights_l2_distance (not yet solved)
-# TODO: implement
+# Step 23 - weights_l2_distance
+def weights_l2_distance(w_gd, w_closed):
+    # TODO: Compute the L2 distance between two weight vectors
+    arr1 = np.asarray(w_gd, dtype=float)
+    arr2 = np.asarray(w_closed, dtype=float)
+    return float(np.sqrt(np.sum((arr1 - arr2) ** 2)))
+    pass
 
 # Step 24 - create_lr_model (not yet solved)
 # TODO: implement
