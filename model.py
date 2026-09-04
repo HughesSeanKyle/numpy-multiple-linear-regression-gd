@@ -276,8 +276,27 @@ def run_one_epoch(state, X_train, y_train, X_val, y_val, lr, patience):
     
     return state
 
-# Step 17 - train_batch_gd (not yet solved)
-# TODO: implement
+# Step 17 - train_batch_gd
+def train_batch_gd(X_train, y_train, X_val, y_val, lr, epochs, patience, seed=None):
+    # TODO: Train weights with full-batch GD for up to epochs, with early stopping.
+        # 1. Deduce total input dimensions (including the prepended bias column)
+    n_features = X_train.shape[1]
+    
+    # 2. Build the initial mutable state dict using your verified Step 015 engine
+    state = init_training_state(n_features, seed=seed)
+    
+    # 3. Spin our optimization loop up to the maximum epoch runway
+    for epoch in range(epochs):
+        # Update the state in-place using our verified Step 016 engine
+        state = run_one_epoch(state, X_train, y_train, X_val, y_val, lr, patience)
+        
+        # 4. Check if our early-stopping state machine issued a break signal
+        if state["stopped"]:
+            break
+            
+    # Return the historical best weights vector and the complete final state dictionary
+    return state["best_weights"], state["train_losses"], state["val_losses"]
+    pass
 
 # Step 18 - mean_absolute_error (not yet solved)
 # TODO: implement
