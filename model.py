@@ -424,8 +424,8 @@ def predict_lr_model(model, X):
 # Step 27 - score_lr_model
 def score_lr_model(model, X, y):
     # TODO: Predict on raw features and return MAE, RMSE, and R^2 metrics.
-    preds = predict_lr_model(model, X_test)
-    return evaluate_regression(y_test, preds)
+    preds = predict_lr_model(model, X)
+    return evaluate_regression(y, preds)
     pass
 
 # Step 28 - compare_with_normal_equation (not yet solved)
