@@ -312,6 +312,8 @@ def root_mean_squared_error(y_true, y_pred):
     pass
 
 # Step 20 - r_squared
+import numpy as np
+
 def r_squared(y_true, y_pred):
     # TODO: Compute the coefficient of determination R^2.
     y_t = np.asarray(y_true, dtype=float)
@@ -419,8 +421,12 @@ def predict_lr_model(model, X):
     return predict_linear(X_b, model["weights"])
     pass
 
-# Step 27 - score_lr_model (not yet solved)
-# TODO: implement
+# Step 27 - score_lr_model
+def score_lr_model(model, X, y):
+    # TODO: Predict on raw features and return MAE, RMSE, and R^2 metrics.
+    preds = predict_lr_model(model, X_test)
+    return evaluate_regression(y_test, preds)
+    pass
 
 # Step 28 - compare_with_normal_equation (not yet solved)
 # TODO: implement
