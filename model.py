@@ -311,8 +311,20 @@ def root_mean_squared_error(y_true, y_pred):
     return float(np.sqrt(mse))
     pass
 
-# Step 20 - r_squared (not yet solved)
-# TODO: implement
+# Step 20 - r_squared
+def r_squared(y_true, y_pred):
+    # TODO: Compute the coefficient of determination R^2.
+    y_t = np.asarray(y_true, dtype=float)
+    y_p = np.asarray(y_pred, dtype=float)
+    
+    ss_res = np.sum((y_t - y_p) ** 2)
+    ss_tot = np.sum((y_t - np.mean(y_t)) ** 2)
+    
+    if ss_tot == 0.0:
+        return 1.0 if ss_res == 0.0 else np.nan
+        
+    return float(1.0 - (ss_res / ss_tot))
+    pass
 
 # Step 21 - evaluate_regression (not yet solved)
 # TODO: implement
