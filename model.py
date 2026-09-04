@@ -411,8 +411,13 @@ def fit_lr_model(model, X_train, y_train, X_val, y_val):
     return model
     pass
 
-# Step 26 - predict_lr_model (not yet solved)
-# TODO: implement
+# Step 26 - predict_lr_model
+def predict_lr_model(model, X):
+    # TODO: Return predicted targets for raw X using the fitted model.
+    # Standardize using training coordinates to avoid leakage
+    X_b = prepare_design_matrix(X, model["mean"], model["std"])
+    return predict_linear(X_b, model["weights"])
+    pass
 
 # Step 27 - score_lr_model (not yet solved)
 # TODO: implement
