@@ -245,8 +245,36 @@ def init_training_state(n_features, seed=None):
     }
     pass
 
-# Step 16 - run_one_epoch (not yet solved)
-# TODO: implement
+# Step 16 - run_one_epoch
+def run_one_epoch(state, X_train, y_train, X_val, y_val, lr, patience):
+    """
+    Advances training by a single full-batch epoch using the mutable state dict.
+    Unpacks Step 014 in the exact sequence it returns.
+    """
+    # 1. Take one GD step using our current state weights
+    updated_weights = gd_step(X_train, y_train, state["weights"], lr)
+    
+    # 2. Extract cross-validation losses for this pass
+    train_loss, val_loss = epoch_train_val_losses(X_train, y_train, X_val, y_val, updated_weights)
+    
+    state["train_losses"].append(train_loss)
+    state["val_losses"].append(val_loss)
+    
+    # 3. Unpack step 014 using its exact return signature sequence:
+    # (stop_training, updated_best_val_loss, updated_wait, updated_best_weights)
+    b_loss, wait_cnt, b_w, stop = update_early_stop_state(
+        val_loss, state["best_val_loss"], state["wait"], 
+        updated_weights, state["best_weights"], patience
+    )
+    
+    # 4. Commit all synchronized changes directly back into the mutable state dictionary
+    state["weights"] = updated_weights.copy()
+    state["best_weights"] = b_w.copy() # Safe to call .copy() now because b_w is an array
+    state["best_val_loss"] = b_loss
+    state["wait"] = wait_cnt
+    state["stopped"] = stop
+    
+    return state
 
 # Step 17 - train_batch_gd (not yet solved)
 # TODO: implement
