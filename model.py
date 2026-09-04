@@ -336,8 +336,19 @@ def evaluate_regression(y_true, y_pred):
     }
     pass
 
-# Step 22 - learning_curve_data (not yet solved)
-# TODO: implement
+# Step 22 - learning_curve_data
+def learning_curve_data(train_losses, val_losses):
+    # TODO: Return epoch indices and loss series for external plotting...
+    # 1. Generate the 1-based epoch list
+    epochs_idx = (np.arange(len(train_losses)) + 1).tolist()
+    
+    # 2. Convert inputs to plain Python lists to strip away np.float64 types
+    # (Using getattr or checking type ensures it works whether input is a list or array)
+    train_list = train_losses.tolist() if isinstance(train_losses, np.ndarray) else list(train_losses)
+    val_list = val_losses.tolist() if isinstance(val_losses, np.ndarray) else list(val_losses)
+    
+    return epochs_idx, train_list, val_list
+    pass
 
 # Step 23 - weights_l2_distance (not yet solved)
 # TODO: implement
